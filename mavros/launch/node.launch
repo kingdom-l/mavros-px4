@@ -11,7 +11,8 @@
 	<arg name="log_output" default="screen" />
 	<arg name="fcu_protocol" default="v2.0" />
 	<arg name="respawn_mavros" default="false" />
-
+	<arg name="flag_use_laser_or_vicon" default="0" /> <!--dummy-->
+	
 	<node pkg="mavros" type="mavros_node" name="mavros" required="$(eval not respawn_mavros)" clear_params="true" output="$(arg log_output)" respawn="$(arg respawn_mavros)">
 		<param name="fcu_url" value="$(arg fcu_url)" />
 		<param name="gcs_url" value="$(arg gcs_url)" />
@@ -22,5 +23,8 @@
 		<!-- load blacklist, config -->
 		<rosparam command="load" file="$(arg pluginlists_yaml)" />
 		<rosparam command="load" file="$(arg config_yaml)" />
+	</node>
+	<node pkg="mavros" type="px4_pos_estimator" name="px4_pos_estimator" output="screen">
+		<param name="flag_use_laser_or_vicon" value= "$(arg flag_use_laser_or_vicon)" />
 	</node>
 </launch>

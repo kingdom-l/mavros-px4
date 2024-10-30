@@ -181,6 +181,16 @@ target_link_libraries(gcs_bridge
   ${catkin_LIBRARIES}
 )
 
+## --dummy ##
+add_executable(px4_pos_estimator 
+  src/px4_pos_estimator.cpp 
+)
+
+target_link_libraries(px4_pos_estimator 
+  ${catkin_LIBRARIES}
+)
+## --dummy ##
+
 #############
 ## Install ##
 #############
